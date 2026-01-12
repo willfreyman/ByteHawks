@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Slider - Nightbots</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8eaf6 100%);
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .process-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .process-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .process-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        .process-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Slider Styles */
+        .slider-container {
+            margin: 4rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .slider-wrapper {
+            position: relative;
+            margin: 2rem 0;
+            padding: 10px 16px;
+        }
+
+        .slider-track {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            overflow: visible;
+        }
+
+        .slider-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            border-radius: 10px;
+            width: 0px;
+            transition: none;
+        }
+
+        .slider-handle {
+            position: absolute;
+            top: 50%;
+            left: 0px;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 3px solid var(--accent-color);
+            border-radius: 50%;
+            cursor: grab;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            z-index: 5;
+            margin-left: -16px;
+        }
+
+        .slider-handle:hover {
+            transform: translateY(-50%) scale(1.2);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .slider-handle:active {
+            cursor: grabbing;
+            transform: translateY(-50%) scale(1.1);
+            background: var(--accent-color);
+        }
+
+        /* Step Markers */
+        .step-markers {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1px;
+            pointer-events: none;
+        }
+
+        .step-marker {
+            width: 2px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Step Labels */
+        .step-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding: 0 10px;
+        }
+
+        .step-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .step-label:hover {
+            background: var(--bg-light);
+            color: var(--primary-color);
+        }
+
+        .step-label.active {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Content Display */
+        .process-content {
+            margin-top: 3rem;
+            min-height: 350px;
+            position: relative;
+        }
+
+        .content-step {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 15px;
+        }
+
+        .content-number {
+            width: 70px;
+            height: 70px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .content-title {
+            flex: 1;
+        }
+
+        .content-title h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-title p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .content-body {
+            padding: 0 2rem;
+        }
+
+        .content-description {
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .content-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Progress Indicator */
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot:hover {
+            background: var(--text-light);
+        }
+
+        .progress-dot.active {
+            background: var(--accent-color);
+            transform: scale(1.3);
+        }
+
+        .progress-dot.completed {
+            background: var(--secondary-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .process-header h1 {
+                font-size: 2rem;
+            }
+
+            .slider-container {
+                padding: 1.5rem;
+            }
+
+            .content-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .content-features {
+                grid-template-columns: 1fr;
+            }
+
+            .step-labels {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .step-label {
+                font-size: 0.75rem;
+                padding: 0.3rem;
+            }
+
+            .content-title h3 {
+                font-size: 1.5rem;
+            }
+
+            .content-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Step-specific accent colors */
+        .content-step[data-step="0"] .content-number,
+        .content-step[data-step="0"] .feature-card {
+            border-color: #4caf50;
+        }
+
+        .content-step[data-step="1"] .content-number {
+            background: #00bcd4;
+        }
+        .content-step[data-step="1"] .feature-card {
+            border-color: #00bcd4;
+        }
+
+        .content-step[data-step="2"] .content-number {
+            background: #ff6f00;
+        }
+        .content-step[data-step="2"] .feature-card {
+            border-color: #ff6f00;
+        }
+
+        .content-step[data-step="3"] .content-number {
+            background: #1a237e;
+        }
+        .content-step[data-step="3"] .feature-card {
+            border-color: #1a237e;
+        }
+    </style>
+</head>
+<body>
+    <div class="process-section">
+        <div class="process-header">
+            <h1>Our Build Process</h1>
+            <p class="process-subtitle">From concept to competition - explore our robotics journey</p>
+        </div>
+
+        <div class="slider-container">
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="progress-dot active" data-step="0"></div>
+                <div class="progress-dot" data-step="1"></div>
+                <div class="progress-dot" data-step="2"></div>
+                <div class="progress-dot" data-step="3"></div>
+            </div>
+
+            <!-- Slider -->
+            <div class="slider-wrapper">
+                <div class="slider-track" id="sliderTrack">
+                    <div class="slider-progress" id="sliderProgress"></div>
+                    <div class="slider-handle" id="sliderHandle"></div>
+                    <div class="step-markers">
+                        <div class="step-marker"></div>
+                        <div class="step-marker"></div>
+                        <div class="step-marker"></div>
+                    </div>
+                </div>
+                <div class="step-labels">
+                    <span class="step-label active" data-step="0">Design</span>
+                    <span class="step-label" data-step="1">Build</span>
+                    <span class="step-label" data-step="2">Program</span>
+                    <span class="step-label" data-step="3">Compete</span>
+                </div>
+            </div>
+
+            <!-- Process Content -->
+            <div class="process-content">
+                <!-- Step 1: Design -->
+                <div class="content-step active" data-step="0">
+                    <div class="content-header">
+                        <div class="content-number">1</div>
+                        <div class="content-title">
+                            <h3>Design & Strategy</h3>
+                            <p>Planning and Innovation Phase</p>
+                        </div>
+                    </div>
+                    <div class="content-body">
+                        <p class="content-description">
+                            Every successful robot begins with thorough planning and innovative design. Our team analyzes the game,
+                            brainstorms solutions, and creates detailed CAD models to bring our vision to life.
+                        </p>
+                        <div class="content-features">
+                            <div class="feature-card">
+                                <h4>📐 CAD Modeling</h4>
+                                <p>Using Onshape and SolidWorks for precise 3D design</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>🎯 Game Analysis</h4>
+                                <p>Strategic planning to maximize scoring potential</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>⚡ Rapid Prototyping</h4>
+                                <p>Quick iterations to test and validate concepts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Build -->
+                <div class="content-step" data-step="1">
+                    <div class="content-header">
+                        <div class="content-number">2</div>
+                        <div class="content-title">
+                            <h3>Build & Fabrication</h3>
+                            <p>Construction and Assembly Phase</p>
+                        </div>
+                    </div>
+                    <div class="content-body">
+                        <p class="content-description">
+                            Our workshop becomes a hub of activity as we transform raw materials into precision components.
+                            Through cutting, drilling, welding, and assembly, we build a competition-ready machine.
+                        </p>
+                        <div class="content-features">
+                            <div class="feature-card">
+                                <h4>🔧 CNC Machining</h4>
+                                <p>Creating precision parts with tight tolerances</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>🖨️ 3D Printing</h4>
+                                <p>Producing complex geometries and custom components</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>⚙️ System Integration</h4>
+                                <p>Combining mechanical and electrical systems</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Program -->
+                <div class="content-step" data-step="2">
+                    <div class="content-header">
+                        <div class="content-number">3</div>
+                        <div class="content-title">
+                            <h3>Programming & Control</h3>
+                            <p>Software Development Phase</p>
+                        </div>
+                    </div>
+                    <div class="content-body">
+                        <p class="content-description">
+                            Code brings our robot to life. We develop sophisticated autonomous routines, implement vision processing,
+                            and create intuitive driver controls for optimal performance.
+                        </p>
+                        <div class="content-features">
+                            <div class="feature-card">
+                                <h4>🤖 Autonomous Mode</h4>
+                                <p>15-second self-driving routines for consistent scoring</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>📷 Vision Systems</h4>
+                                <p>Camera-based targeting and object detection</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>🎮 Control Systems</h4>
+                                <p>Responsive driver interfaces and feedback loops</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Compete -->
+                <div class="content-step" data-step="3">
+                    <div class="content-header">
+                        <div class="content-number">4</div>
+                        <div class="content-title">
+                            <h3>Competition & Excellence</h3>
+                            <p>Performance and Iteration Phase</p>
+                        </div>
+                    </div>
+                    <div class="content-body">
+                        <p class="content-description">
+                            Competition is where preparation meets opportunity. We collaborate with alliance partners, adapt strategies
+                            in real-time, and continuously improve through each match.
+                        </p>
+                        <div class="content-features">
+                            <div class="feature-card">
+                                <h4>🏁 Match Strategy</h4>
+                                <p>Real-time adaptation and tactical planning</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>🔨 Pit Operations</h4>
+                                <p>Quick repairs and improvements between matches</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>🤝 Alliance Cooperation</h4>
+                                <p>Building partnerships for competitive success</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Slider elements
+        const sliderTrack = document.getElementById('sliderTrack');
+        const sliderProgress = document.getElementById('sliderProgress');
+        const sliderHandle = document.getElementById('sliderHandle');
+
+        // Content elements
+        const contentSteps = document.querySelectorAll('.content-step');
+        const progressDots = document.querySelectorAll('.progress-dot');
+        const stepLabels = document.querySelectorAll('.step-label');
+
+        let isDragging = false;
+        let currentValue = 0;
+
+        function updateSlider(percentage) {
+            // Clamp percentage between 0 and 100
+            percentage = Math.max(0, Math.min(100, percentage));
+            currentValue = percentage;
+
+            // Calculate actual pixel position
+            const trackWidth = sliderTrack.offsetWidth;
+            const pixelPosition = (percentage / 100) * trackWidth;
+
+            // Update slider visuals - progress bar width matches handle position
+            sliderProgress.style.width = pixelPosition + 'px';
+            sliderHandle.style.left = pixelPosition + 'px';
+
+            // Calculate current step (0-3)
+            const step = Math.min(Math.floor(percentage / 25), 3);
+
+            // Update content
+            contentSteps.forEach((content, index) => {
+                content.classList.toggle('active', index === step);
+            });
+
+            // Update progress dots
+            progressDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === step);
+                dot.classList.toggle('completed', index < step);
+            });
+
+            // Update step labels
+            stepLabels.forEach((label, index) => {
+                label.classList.toggle('active', index === step);
+            });
+        }
+
+        // Mouse events
+        sliderHandle.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            sliderHandle.style.cursor = 'grabbing';
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+
+            const rect = sliderTrack.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+
+            updateSlider(percentage);
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                sliderHandle.style.cursor = 'grab';
+
+                // Snap to nearest step
+                const step = Math.round(currentValue / 25);
+                updateSlider(step * 25);
+            }
+        });
+
+        // Touch events for mobile
+        sliderHandle.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            e.preventDefault();
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+
+            const rect = sliderTrack.getBoundingClientRect();
+            const x = e.touches[0].clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+
+            updateSlider(percentage);
+        });
+
+        document.addEventListener('touchend', () => {
+            if (isDragging) {
+                isDragging = false;
+
+                // Snap to nearest step
+                const step = Math.round(currentValue / 25);
+                updateSlider(step * 25);
+            }
+        });
+
+        // Click on track to jump
+        sliderTrack.addEventListener('click', (e) => {
+            if (e.target === sliderHandle) return;
+
+            const rect = sliderTrack.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percentage = (x / rect.width) * 100;
+
+            // Snap to nearest step
+            const step = Math.round(percentage / 25);
+            updateSlider(step * 25);
+        });
+
+        // Click on dots or labels to jump
+        [...progressDots, ...stepLabels].forEach((element) => {
+            element.addEventListener('click', () => {
+                const step = parseInt(element.dataset.step);
+                updateSlider(step * 25);
+            });
+        });
+
+        // Initialize at step 0
+        updateSlider(0);
+    </script>
+</body>
+</html>

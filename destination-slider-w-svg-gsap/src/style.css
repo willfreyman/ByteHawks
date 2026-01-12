@@ -1,0 +1,293 @@
+@import url('https://unpkg.com/normalize.css') layer(normalize);
+
+@layer normalize, base, demo, explode;
+
+@layer explode {
+  .slider [type=range] {
+    transition-property: filter, opacity, translate;
+    transition-duration: 0.22s;
+    transition-timing-function: ease-out;
+  }
+  .slider { touch-action: none; }
+  [data-explode='true'] {
+    .slider [type=range] {
+      filter: blur(0);
+      opacity: 1;
+      translate: 0 100px;
+    }
+    .arrow {
+      opacity: 0.7;
+      filter: blur(0);
+    }
+  }
+  body { overflow: hidden; }
+  .arrow {
+    opacity: 0;
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 0.875rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    opacity: 0;
+    rotate: 10deg;
+    filter: blur(4px);
+    transition: opacity 0.22s ease-out, filter 0.22s ease-out;
+    pointer-events: none;
+    line-height: 1.5;
+    translate: 150px 110px;
+
+    span {
+      white-space: nowrap;
+    }
+    svg {
+      bottom: calc(100% + 10px);
+      position: absolute;
+      rotate: 86deg;
+      translate: -50% 0;
+      scale: -1 -1;
+      left: 0;
+      width: 60px;
+    }
+  }
+}
+
+@layer demo {
+  .reference {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    width: 60px;
+  }
+
+  .slider {
+    /* outline: 2px dashed red; */
+    width: 260px;
+    height: 44px;
+    position: relative;
+    opacity: 0;
+  }
+  .slider [type=range] {
+    position: absolute;
+    inset: 0;
+    filter: blur(4px);
+    opacity: 0;
+    accent-color: canvasText;
+  }
+  .slider svg {
+    width: 260px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    pointer-events: none;
+    translate: 0 -50%;
+
+    overflow: visible !important;
+    
+    .track {
+      stroke: currentColor;
+      stroke-width: 3px;
+      stroke-dasharray: 0 15;
+      stroke-dashoffset: -0.5;
+      stroke-linecap: round;
+    }
+    .track--progress {
+      stroke-width: 3px;
+      stroke-dasharray: 0 0;
+    }
+    circle {
+      transform-box: fill-box;
+      transform-origin: center;
+      translate: 0 0;
+    }
+    .marker__dot {
+      scale: 1;
+
+    }
+    .marker__circle {
+      fill: var(--accent);
+      stroke: var(--accent);
+    }
+    .marker__balloon {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition-property: translate, scale;
+      transition-duration: 0.15s;
+      transition-timing-function: ease-out;
+      translate: 0 -42px;
+      scale: 0;
+      translate: 0 0;
+    }
+    .marker__symbols {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition-property: translate, scale, opacity;
+      transition-duration: 0.15s;
+      scale: 0;
+      opacity: 0;
+      translate: - 0;
+    }
+  }
+  .slider [type=range]:is(:active, :focus-visible) + svg .marker__balloon {
+    scale: 1;
+    translate: 0 -42px;
+  }
+  .slider [type=range]:is(:active, :focus-visible) + svg .marker__symbols {
+    translate: -0.5px -50px;
+    opacity: 1;
+    scale: 1.6;
+  }
+
+  .marker-symbol {
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition-property: opacity;
+    transition-duration: .15s;
+    transition-timing-function: ease-out;
+  }
+  .marker-symbol--triangle {
+    translate: -1px -1px;
+    scale: 0.9;
+  }
+  .marker-symbol--star {
+    stroke-width: 1.6px;
+    scale: 1.1;
+    translate: 1px 0;
+  }
+  .marker-symbol--square {
+    scale: .9;
+  }
+  .marker-symbol[data-active='true'] {
+    opacity: 1;
+  }
+
+  .slider [type=range] {
+    cursor: grab;
+  }
+
+  .slider [type=range]:active {
+    cursor: grabbing;
+  }
+
+}
+
+@layer base {
+  :root {
+    --font-size-min: 16;
+    --font-size-max: 20;
+    --font-ratio-min: 1.2;
+    --font-ratio-max: 1.33;
+    --font-width-min: 375;
+    --font-width-max: 1500;
+  }
+
+  html {
+    color-scheme: light dark;
+  }
+
+  [data-theme='light'] {
+    color-scheme: light only;
+  }
+
+  [data-theme='dark'] {
+    color-scheme: dark only;
+  }
+
+  :where(.fluid) {
+    --fluid-min: calc(
+      var(--font-size-min) * pow(var(--font-ratio-min), var(--font-level, 0))
+    );
+    --fluid-max: calc(
+      var(--font-size-max) * pow(var(--font-ratio-max), var(--font-level, 0))
+    );
+    --fluid-preferred: calc(
+      (var(--fluid-max) - var(--fluid-min)) /
+        (var(--font-width-max) - var(--font-width-min))
+    );
+    --fluid-type: clamp(
+      (var(--fluid-min) / 16) * 1rem,
+      ((var(--fluid-min) / 16) * 1rem) -
+        (((var(--fluid-preferred) * var(--font-width-min)) / 16) * 1rem) +
+        (var(--fluid-preferred) * var(--variable-unit, 100vi)),
+      (var(--fluid-max) / 16) * 1rem
+    );
+    font-size: var(--fluid-type);
+  }
+
+  *,
+  *:after,
+  *:before {
+    box-sizing: border-box;
+  }
+
+  body {
+    background: light-dark(#fff, #000);
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    font-family: 'SF Pro Text', 'SF Pro Icons', 'AOS Icons', 'Helvetica Neue',
+      Helvetica, Arial, sans-serif, system-ui;
+  }
+
+  body::before {
+    --size: 45px;
+    --line: color-mix(in hsl, canvasText, transparent 80%);
+    content: '';
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    background: linear-gradient(
+          90deg,
+          var(--line) 1px,
+          transparent 1px var(--size)
+        )
+        calc(var(--size) * 0.36) 50% / var(--size) var(--size),
+      linear-gradient(var(--line) 1px, transparent 1px var(--size)) 0%
+        calc(var(--size) * 0.32) / var(--size) var(--size);
+    mask: linear-gradient(-20deg, transparent 50%, white);
+    top: 0;
+    transform-style: flat;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .bear-link {
+    color: canvasText;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    width: 48px;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    opacity: 0.8;
+  }
+
+  :where(.x-link, .bear-link):is(:hover, :focus-visible) {
+    opacity: 1;
+  }
+
+  .bear-link svg {
+    width: 75%;
+  }
+
+  /* Utilities */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+div.tp-dfwv {
+  width: 256px;
+  position: fixed;
+}

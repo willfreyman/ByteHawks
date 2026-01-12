@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Northfield Nightbots - FRC Team</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
+</head>
+<body>
+    <!--
+    =====================================================
+    PLACEHOLDER CONTENT TRACKING - TO BE REPLACED:
+    =====================================================
+
+    1. HERO SECTION:
+       - [ ] Hero background image (line ~47)
+
+    2. PHOTO STRIP (10 photos total - 5 unique x2 for scrolling):
+       - [ ] Robot Close-up photo (lines ~76, 104)
+       - [ ] Team Working photo (lines ~81, 109)
+       - [ ] Competition Action photo (lines ~86, 114)
+       - [ ] Award Ceremony photo (lines ~91, 119)
+       - [ ] Team Celebration photo (lines ~96, 124)
+
+    3. COMPETITION GALLERY (12 photos):
+       - [ ] Competition photos 1-6 (lines ~282-297)
+       - [ ] Competition photos 1-6 duplicate (lines ~301-316)
+
+    4. MENTOR SECTION:
+       - [ ] Ken Prehoda photo (line ~349)
+       - [ ] Greg Kubin photo (line ~357) + bio (line ~362)
+       - [ ] William Williams photo (line ~365) + bio (line ~370)
+       - [ ] Fourth mentor name, photo (line ~373) + bio (line ~378)
+
+    5. OUR PROCESS SECTION:
+       - [ ] Design process description (line ~431)
+       - [ ] Design process image (line ~440)
+       - [ ] Building process description (line ~453)
+       - [ ] Building process image (line ~462)
+       - [ ] Programming process description (line ~475)
+       - [ ] Programming process image (line ~484)
+       - [ ] Competition description (line ~497)
+       - [ ] Competition image (line ~506)
+
+    6. SPONSOR LOGOS:
+       - [ ] Sponsor logo 1 (line ~623)
+       - [ ] Sponsor logo 2 (line ~626)
+       - [ ] Sponsor logo 3 (line ~629)
+       - [ ] Sponsor logo 4 (line ~632)
+
+    =====================================================
+    Search for "TODO: PLACEHOLDER" to find all items
+    =====================================================
+    -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h1>Northfield Nightbots #10686</h1>
+                    <span class="tagline">Northfield High School - Denver, CO</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About Our Team</a></li>
+                    <li><a href="#first" class="nav-link">FIRST Robotics</a></li>
+                    <li><a href="#mentors" class="nav-link">Mentors/Coaches</a></li>
+                    <li><a href="#process" class="nav-link">Our Process</a></li>
+                    <li><a href="#support" class="nav-link">Support Us</a></li>
+                    <li><a href="#resources" class="nav-link">Resources</a></li>
+                    <li class="search-container">
+                        <label class="floating">
+                            <span>Search</span>
+                            <input id="searchInput" placeholder="Search" autocomplete="off">
+                        </label>
+                        <div id="searchBackdrop" class="search-backdrop"></div>
+                        <div id="searchResults" class="search-results-dropdown"></div>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero hero-mission">
+            <div class="hero-background">
+                <div class="hero-image-placeholder">
+                </div>
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content-wrapper">
+                <div class="hero-header">
+                    <h1 class="team-name">Northfield Nightbots</h1>
+                    <p class="team-number">FRC Team #10686</p>
+                </div>
+                <div class="mission-statement">
+                    <h2 class="mission-title">Our Mission</h2>
+                    <div class="mission-text">
+                        <p>The Northfield Nightbots team exists to advance the education of Northfield High School students in the areas of science, technology, engineering, and mathematics (STEM) by preparing for and participating in FIRST Robotics competitions.</p>
+                        <p>These activities help build skills and confidence far beyond the classroom to include technical knowledge, engineering design, teamwork, personal responsibility, leadership, and professionalism.</p>
+                        <p>Our mission is to increase access for groups that are under-represented in STEM fields, to use our knowledge to serve our community, and build a balanced, diverse, and talented team of young engineers.</p>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <a href="#about" class="btn btn-primary">Learn More</a>
+                    <a href="https://givebutter.com/ofnP7x" target="_blank" class="btn btn-secondary">Donate</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Decorative Photo Strip -->
+        <div class="photo-strip">
+            <div class="photo-strip-track">
+                <div class="photo-strip-container">
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>[Robot Close-up]</span>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>[Team Working]</span>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>[Competition Action]</span>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>[Award Ceremony]</span>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>[Team Celebration]</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Duplicate set for seamless infinite scroll -->
+                <div class="photo-strip-container">
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>[Robot Close-up]</span>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>[Team Working]</span>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>[Competition Action]</span>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>[Award Ceremony]</span>
+                        </div>
+                    </div>
+                    <div class="photo-item">
+                        <div class="photo-placeholder">
+                            <span>[Team Celebration]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="about" class="section about-enhanced">
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+            <div class="container">
+                <h2 class="section-title">About Our Team</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Our Story</h3>
+                        <p>We are a grassroots team that was founded in <strong>January 2025</strong> by freshman, <strong>Habib Seid</strong> at Northfield High School in Northeast Denver. When he mentioned to his Biology teacher that he wanted to start a team, she reached out to FIRST Colorado and the Nightbots were formed.</p>
+                        <p>With the generous support of the <strong>Argosy Foundation</strong> and a <strong>Google equity grant</strong>, we built our very first competitive robot, dubbed <strong>"Lil Sneaky"</strong>. We have students with a diverse array of identities and cultural backgrounds.</p>
+                        <p>Despite getting a late start, we were able to pull together a team of over 20 students with skills in programming, electrical, media, fundraising, imagery, and construction. Defying all odds, we finished in <strong>14th place out of over 50 teams</strong> from all around the globe. To top it off, we won the coveted <strong>"Rookie of the Year"</strong> award at the Colorado Regionals!</p>
+
+                        <h3>What We Do</h3>
+                        <p>Each year, our team designs, builds, and programs a robot to compete in the FIRST Robotics Competition, one of the world's leading STEM programs for high school students.</p>
+                        <p>This experience gives our members the opportunity to apply classroom knowledge to real-world engineering challenges. Students gain valuable skills in design, coding, electrical systems, and fabrication, while also developing business, leadership, and communication abilities that prepare them for the future.</p>
+
+                        <h3>Our Mission</h3>
+                        <p>Our mission is to increase access for groups that are under-represented in STEM fields, to use our knowledge to serve our community, and build a balanced, diverse, and talented team of young engineers. These activities help build skills and confidence far beyond the classroom to include technical knowledge, engineering design, teamwork, personal responsibility, leadership, and professionalism.</p>
+
+                        <h3>Achievements</h3>
+                        <ul class="achievements-list">
+                            <li><strong>Rookie of the Year Award</strong> - Colorado Regionals 2025</li>
+                            <li><strong>14th Place Finish</strong> - Out of 50+ international teams in debut season</li>
+                            <li><strong>First Robot "Lil Sneaky"</strong> - Successfully competed in inaugural season</li>
+                            <li><strong>Team Growth</strong> - Expanded to 40+ dedicated students</li>
+                        </ul>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <h4>Team Members</h4>
+                            <p class="stat-number">40+</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Founded</h4>
+                            <p class="stat-number">2025</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Global Ranking</h4>
+                            <p class="stat-number">14<sup>th</sup></p>
+                            <p class="stat-subtitle">of 50+ teams</p>
+                        </div>
+                        <div class="stat-card rookie-award">
+                            <div class="award-icon">🏆</div>
+                            <h4>Rookie of the Year</h4>
+                            <p class="stat-subtitle">Colorado Regionals</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="image-collage">
+                        <div class="collage-item collage-1">
+                            <img src="KCMT1.JPG" alt="Workshop Photo" class="collage-image">
+                        </div>
+                        <div class="collage-item collage-2">
+                            <img src="ROBOTBUILD.JPG" alt="Robot Build KMCT Photo" class="collage-image">
+                        </div>
+                        <div class="collage-item collage-3">
+                            <img src="TEAMMEETING.JPG" alt="Team Meeting Photo" class="collage-image">
+                        </div>
+                        <div class="collage-item collage-4">
+                            <img src="IMG_3983.JPG" alt="Team Programming Photo" class="collage-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Decorative Divider -->
+        <div class="section-divider">
+            <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+                <path d="M0,50 C300,100 900,0 1200,50 L1200,100 L0,100 Z" fill="var(--bg-alt)"></path>
+            </svg>
+        </div>
+
+        <section id="first" class="section section-alt first-enhanced">
+            <div class="gradient-overlay"></div>
+            <div class="container">
+                <h2 class="section-title">FIRST Robotics</h2>
+                <div class="first-intro">
+                    <h3>What is FIRST?</h3>
+                    <p class="subtitle">Inspiring the Next Generation</p>
+                    <p>FIRST (For Inspiration and Recognition of Science and Technology) is a global organization dedicated to motivating young people to explore careers in science, technology, engineering, and mathematics (STEM). Founded in 1989 by inventor Dean Kamen, FIRST encourages students to learn through hands-on programs that combine creativity, problem-solving, and mentorship.</p>
+                    <p>Through participation, students gain confidence, develop leadership and collaboration skills, and connect with mentors and peers who guide them in pursuing STEM opportunities. FIRST inspires students to think critically, innovate, and prepare for future careers in engineering, technology, and beyond.</p>
+                </div>
+
+                <div class="first-programs">
+                    <!-- FRC Section -->
+                    <div class="program-section">
+                        <div class="program-content">
+                            <h3>FIRST Robotics Competition</h3>
+                            <p class="program-subtitle">Inspiring the Next Generation</p>
+                            <p>FRC challenges high school students to design and build full-scale robots for annual competitions. Teams tackle complex engineering problems, develop coding and fabrication skills, and collaborate on strategy and teamwork. Mentors provide guidance, and students practice Gracious Professionalism®, gaining real-world experience and preparing for future STEM careers.</p>
+                        </div>
+                        <div class="program-video">
+                            <iframe class="youtube-embed"
+                                src="https://www.youtube.com/embed/Jd29kzjclV0"
+                                title="FIRST Robotics Competition"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- FTC Section -->
+                    <div class="program-section reverse">
+                        <div class="program-video">
+                            <iframe class="youtube-embed"
+                                src="https://www.youtube.com/embed/y5NPp_5KHuk"
+                                title="FIRST Tech Challenge"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="program-content">
+                            <h3>FIRST Tech Challenge</h3>
+                            <p class="program-subtitle">Engineering Challenges for 7-12 Grade Students</p>
+                            <p>FTC allows students ages 12–18 to design, build, and program robots to compete in challenging, strategic games. Teams apply engineering, coding, and problem-solving skills while learning teamwork and leadership. Mentors guide students throughout the process, fostering growth, innovation, and Gracious Professionalism®.</p>
+                        </div>
+                    </div>
+
+                    <!-- FLL Section -->
+                    <div class="program-section">
+                        <div class="program-content">
+                            <h3>FIRST LEGO League</h3>
+                            <p class="program-subtitle">Building Skills Through Play and Innovation</p>
+                            <p>FLL introduces students ages 9–14 to STEM through hands-on, team-based challenges. Each season, teams research a real-world problem and build LEGO® robots to complete specific tasks. Students learn creativity, critical thinking, teamwork, and presentation skills while exploring science and engineering in a fun, supportive environment.</p>
+                        </div>
+                        <div class="program-video">
+                            <iframe class="youtube-embed"
+                                src="https://www.youtube.com/embed/kkN08bDv9EI"
+                                title="FIRST LEGO League"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Banner -->
+        <div class="gallery-banner">
+            <div class="gallery-track">
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 1]</div>
+                </div>
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 2]</div>
+                </div>
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 3]</div>
+                </div>
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 4]</div>
+                </div>
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 5]</div>
+                </div>
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 6]</div>
+                </div>
+                <!-- Duplicate ALL slides for infinite scroll -->
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 1]</div>
+                </div>
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 2]</div>
+                </div>
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 3]</div>
+                </div>
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 4]</div>
+                </div>
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 5]</div>
+                </div>
+                <div class="gallery-slide">
+                    <div class="gallery-image">[Competition 6]</div>
+                </div>
+            </div>
+        </div>
+
+        <section id="mentors" class="section mentors-enhanced">
+            <div class="geometric-bg">
+                <div class="geo-shape geo-1"></div>
+                <div class="geo-shape geo-2"></div>
+            </div>
+            <div class="container">
+                <h2 class="section-title">Mentors & Coaches</h2>
+                <div class="mentors-intro">
+                    <p>Guiding Our Team</p>
+                </div>
+                <div class="mentors-grid">
+                    <div class="mentor-card">
+                        <div class="mentor-photo">
+                            <img src="Anna-Noble.jpg" alt="Anna Noble">
+                        </div>
+                        <h3>Anna Noble</h3>
+                        <p class="mentor-role">Biology Teacher & Coach</p>
+                        <p class="mentor-bio">Anna Noble teaches Honors Biology at NHS</p>
+                    </div>
+                    <div class="mentor-card">
+                        <div class="mentor-photo">
+                            <img src="Yukta-Thadi.jpg" alt="Yukta Thadi">
+                        </div>
+                        <h3>Yukta Thadi</h3>
+                        <p class="mentor-role">Engineering Teacher & Coach</p>
+                        <p class="mentor-bio">Yukta Thadi teaches Engineering at NHS</p>
+                    </div>
+                    <div class="mentor-card">
+                        <div class="mentor-photo placeholder-image">
+                            <p>[Photo]</p>
+                        </div>
+                        <h3>Taed</h3>
+                        <p class="mentor-role">FIRST Mentor</p>
+                        <p class="mentor-bio">Taed is our FIRST mentor for the 2026 Season. He comes with over 40 years of experience as a pediatric orthotic and prosthetic engineer. He has mentored FIRST robotics teams in CA for 15 years</p>
+                    </div>
+                    <div class="mentor-card">
+                        <div class="mentor-photo placeholder-image">
+                            <p>[Photo]</p>
+                        </div>
+                        <h3>Mark</h3>
+                        <p class="mentor-role">Mentor</p>
+                        <p class="mentor-bio">[Placeholder: Brief bio, expertise, and years with team]</p>
+                    </div>
+                    <div class="mentor-card">
+                        <div class="mentor-photo placeholder-image">
+                            <p>[Photo]</p>
+                        </div>
+                        <h3>Ben</h3>
+                        <p class="mentor-role">Mentor</p>
+                        <p class="mentor-bio">[Placeholder: Brief bio, expertise, and years with team]</p>
+                    </div>
+                    <div class="mentor-card">
+                        <div class="mentor-photo placeholder-image">
+                            <p>[Photo]</p>
+                        </div>
+                        <h3>Kendall</h3>
+                        <p class="mentor-role">Mentor</p>
+                        <p class="mentor-bio">[Placeholder: Brief bio, expertise, and years with team]</p>
+                    </div>
+                </div>
+                <div class="mentor-cta">
+                    <h3>Interested in Mentoring?</h3>
+                    <p>Join our team of dedicated mentors and help shape the next generation of engineers and innovators. We welcome professionals from all backgrounds who are passionate about STEM education.</p>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=northfieldnightbots@gmail.com&su=Interested%20in%20Mentoring%20Nightbots%20Robotics&body=Hello%20Nightbots%20Team,%0A%0AI'm%20interested%20in%20becoming%20a%20mentor%20for%20your%20robotics%20team.%0A%0AName:%20%0ABackground/Expertise:%20%0AAvailability:%20%0A%0AI'd%20love%20to%20learn%20more%20about%20how%20I%20can%20contribute%20to%20your%20team's%20success!%0A%0ABest%20regards," class="btn btn-primary" target="_blank">Contact Us</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="section process-section">
+            <div class="container">
+                <h2 class="section-title">Our Process</h2>
+                <div class="process-subtitle">From Concept to Competition</div>
+
+                <div class="process-slider-container">
+                    <!-- Progress Bar -->
+                    <div class="process-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-dots">
+                            <div class="progress-dot active" data-step="1">
+                                <span class="dot-number">1</span>
+                                <span class="dot-label">Design</span>
+                            </div>
+                            <div class="progress-dot" data-step="2">
+                                <span class="dot-number">2</span>
+                                <span class="dot-label">Build</span>
+                            </div>
+                            <div class="progress-dot" data-step="3">
+                                <span class="dot-number">3</span>
+                                <span class="dot-label">Program</span>
+                            </div>
+                            <div class="progress-dot" data-step="4">
+                                <span class="dot-number">4</span>
+                                <span class="dot-label">Compete</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slider Content -->
+                    <div class="process-slider">
+                        <div class="slider-wrapper">
+                            <!-- Step 1 -->
+                            <div class="process-slide active" data-step="1">
+                                <div class="slide-content">
+                                    <div class="slide-icon">
+                                        <div class="icon-animation">📐</div>
+                                    </div>
+                                    <h3 class="slide-title">Step 1: Design & Brainstorm</h3>
+                                    <div class="slide-description">
+                                        <p>[Placeholder: Our design process begins with understanding the game challenge. Teams collaborate to brainstorm innovative solutions, sketch concepts, and use CAD software to create detailed 3D models.]</p>
+                                    </div>
+                                    <ul class="slide-features">
+                                        <li>Game analysis and strategy development</li>
+                                        <li>Concept sketching and prototyping</li>
+                                        <li>CAD modeling with SolidWorks</li>
+                                        <li>Design reviews and iterations</li>
+                                    </ul>
+                                    <div class="slide-image">
+                                        <div class="image-placeholder">[Design Process Image]</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="process-slide" data-step="2">
+                                <div class="slide-content">
+                                    <div class="slide-icon">
+                                        <div class="icon-animation">🔧</div>
+                                    </div>
+                                    <h3 class="slide-title">Step 2: Build & Fabricate</h3>
+                                    <div class="slide-description">
+                                        <p>[Placeholder: With designs finalized, we move to fabrication. Using tools from basic hand tools to advanced machinery, we bring our robot to life piece by piece.]</p>
+                                    </div>
+                                    <ul class="slide-features">
+                                        <li>Material selection and procurement</li>
+                                        <li>Precision cutting and machining</li>
+                                        <li>Assembly and mechanical systems</li>
+                                        <li>Quality control and testing</li>
+                                    </ul>
+                                    <div class="slide-image">
+                                        <div class="image-placeholder">[Building Process Image]</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="process-slide" data-step="3">
+                                <div class="slide-content">
+                                    <div class="slide-icon">
+                                        <div class="icon-animation">💻</div>
+                                    </div>
+                                    <h3 class="slide-title">Step 3: Program & Test</h3>
+                                    <div class="slide-description">
+                                        <p>[Placeholder: Programming brings our robot to life. We code autonomous routines, driver controls, and sensor integration while continuously testing and refining.]</p>
+                                    </div>
+                                    <ul class="slide-features">
+                                        <li>Java programming</li>
+                                        <li>Sensor integration and calibration</li>
+                                        <li>Autonomous path planning</li>
+                                        <li>Driver practice and optimization</li>
+                                    </ul>
+                                    <div class="slide-image">
+                                        <div class="image-placeholder">[Programming Process Image]</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="process-slide" data-step="4">
+                                <div class="slide-content">
+                                    <div class="slide-icon">
+                                        <div class="icon-animation">🏆</div>
+                                    </div>
+                                    <h3 class="slide-title">Step 4: Compete & Learn</h3>
+                                    <div class="slide-description">
+                                        <p>[Placeholder: Competition day! We put our robot to the test, collaborate with alliance partners, and learn from both successes and challenges.]</p>
+                                    </div>
+                                    <ul class="slide-features">
+                                        <li>Pre-competition preparation</li>
+                                        <li>Alliance strategy and scouting</li>
+                                        <li>Match performance and adaptation</li>
+                                        <li>Post-match analysis and improvements</li>
+                                    </ul>
+                                    <div class="slide-image">
+                                        <div class="image-placeholder">[Competition Image]</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Controls -->
+                    <div class="slider-controls">
+                        <button class="slider-btn prev-btn" id="prevBtn">
+                            <span>←</span>
+                        </button>
+                        <button class="slider-btn next-btn" id="nextBtn">
+                            <span>→</span>
+                        </button>
+                    </div>
+
+                    <!-- Auto-play indicator -->
+                    <div class="autoplay-indicator">
+                        <button class="autoplay-btn" id="autoplayBtn">
+                            <span class="play-icon">▶</span>
+                            <span class="pause-icon" style="display: none;">⏸</span>
+                        </button>
+                        <div class="autoplay-progress">
+                            <div class="autoplay-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="support" class="section section-alt support-enhanced">
+            <div class="particles-bg">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+            <div class="container">
+                <h2 class="section-title">Support Our Mission</h2>
+                <div class="support-content">
+                    <div class="support-intro">
+                        <h3>Investing in STEM</h3>
+                        <p>As our team grows, every member plays a vital role in our success. With over 40 dedicated students contributing their skills and creativity, our impact—and our expenses—have grown too.</p>
+                        <p>We rely on donations, grants, and sponsorships to fund materials, competition fees, and travel costs. These funds help us compete nationally and showcase our team's innovation and talent.</p>
+                        <p>Beyond competition, we're committed to giving back—by inspiring younger students, expanding access to STEM, and building partnerships with local businesses.</p>
+                        <p class="highlight-text">Every contribution helps us build not just robots, but opportunities for the future.</p>
+                    </div>
+
+                    <div class="sponsorship-section">
+                        <h3>Sponsorship Levels</h3>
+                        <div class="sponsorship-tiers-new">
+                            <div class="tier-card soar">
+                                <div class="tier-header">
+                                    <h4>Soar</h4>
+                                    <p class="tier-amount">$5,000+</p>
+                                </div>
+                                <ul class="tier-benefits">
+                                    <li>Large company logo on banner</li>
+                                    <li>Company logo on robot sponsor panel</li>
+                                    <li>Company logo on team shirts</li>
+                                    <li>Logo and company link on website</li>
+                                    <li>4 free team shirts</li>
+                                    <li>2 free hoodies</li>
+                                </ul>
+                            </div>
+                            <div class="tier-card glide">
+                                <div class="tier-header">
+                                    <h4>Glide</h4>
+                                    <p class="tier-amount">$1,000+</p>
+                                </div>
+                                <ul class="tier-benefits">
+                                    <li>Company logo on banner</li>
+                                    <li>Company logo on robot sponsor panel</li>
+                                    <li>Company logo on team shirts</li>
+                                    <li>Logo and company link on website</li>
+                                    <li>2 free team shirts</li>
+                                    <li>1 free hoodie</li>
+                                </ul>
+                            </div>
+                            <div class="tier-card ascend">
+                                <div class="tier-header">
+                                    <h4>Ascend</h4>
+                                    <p class="tier-amount">$500+</p>
+                                </div>
+                                <ul class="tier-benefits">
+                                    <li>Company logo on team shirts</li>
+                                    <li>Logo and company link on website</li>
+                                    <li>2 free team shirts</li>
+                                </ul>
+                            </div>
+                            <div class="tier-card rise">
+                                <div class="tier-header">
+                                    <h4>Rise</h4>
+                                    <p class="tier-amount">$250+</p>
+                                </div>
+                                <ul class="tier-benefits">
+                                    <li>Company logo on team shirts</li>
+                                    <li>Logo and company link on website</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sponsorship-actions">
+                            <a href="https://givebutter.com/ofnP7x" target="_blank" class="btn btn-primary">Donate Now</a>
+                            <a href="sponsorship-packet.html" class="btn btn-packet">📋 View Sponsorship Packet</a>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdSGAU7zY8PEo-5pYsIkbzh9i8YjZ_IdNUP_mBUUhc6BCNsNw/viewform" target="_blank" class="btn btn-sponsorship">Sponsorship Form</a>
+                        </div>
+                    </div>
+
+                    <div class="support-statement">
+                        <p>Our team would not be possible without the support of parents, students, and Northfield community members who share our vision of developing an inclusive and welcoming community for all interested in building robots.</p>
+                    </div>
+
+                    <div class="current-sponsors">
+                        <h3>Our Corporate Partners</h3>
+                        <div class="sponsors-grid">
+                            <div class="sponsor-logo placeholder-image">
+                                <p>[Sponsor Logo]</p>
+                            </div>
+                            <div class="sponsor-logo placeholder-image">
+                                <p>[Sponsor Logo]</p>
+                            </div>
+                            <div class="sponsor-logo placeholder-image">
+                                <p>[Sponsor Logo]</p>
+                            </div>
+                            <div class="sponsor-logo placeholder-image">
+                                <p>[Sponsor Logo]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources" class="section">
+            <div class="container">
+                <h2 class="section-title">Resources</h2>
+
+                <!-- Help Us Succeed Section -->
+                <div class="help-section">
+                    <h3>Help Us Succeed - Support Our Team!</h3>
+                    <p class="help-intro">You can help Northfield Robotics by donating, sharing our story on social media, or volunteering your time. Every contribution helps our students build, learn, and compete at their best.</p>
+
+                    <div class="support-cards">
+                        <div class="support-card">
+                            <h4>Donate Directly</h4>
+                            <h5>Donate Today</h5>
+                            <p>Support Northfield Robotics by contributing directly. Every donation helps our students build robots, travel to competitions, and gain hands-on STEM experience.</p>
+                            <a href="https://givebutter.com/ofnP7x" target="_blank" class="btn btn-primary">Donation Link</a>
+                        </div>
+
+                        <div class="support-card">
+                            <h4>Share & Sponsor</h4>
+                            <h5>Spread the Word</h5>
+                            <p>Share our sponsorship information with your network! Access our sponsorship packet below to see ways to support and share with potential sponsors.</p>
+                            <a href="sponsorship-packet.html" class="btn btn-primary">View Sponsorship Packet</a>
+                        </div>
+
+                        <div class="support-card">
+                            <h4>Volunteer</h4>
+                            <h5>Join Our Team</h5>
+                            <p>Lend your time and skills! Mentors, coaches, and volunteers make a huge impact, guiding students and helping them succeed on and off the field.</p>
+                            <p class="contact-info">Email: <a href="mailto:northfieldnightbots@gmail.com">northfieldnightbots@gmail.com</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Join Our Team Section -->
+                <div class="join-section">
+                    <h3>Join Our Team!</h3>
+                    <h4>Being Apart of FIRST</h4>
+                    <ol class="join-steps">
+                        <li>Fill out the application: <a href="https://forms.gle/yYV9XBrpBBrwzDuo9" target="_blank">https://forms.gle/yYV9XBrpBBrwzDuo9</a></li>
+                        <li>Join our discord</li>
+                        <li>Sign and read our handbook</li>
+                        <li>Register with FIRST</li>
+                        <li>Come to our meetings!</li>
+                    </ol>
+                </div>
+
+                <!-- Socials Section -->
+                <div class="socials-section">
+                    <h3>Connect With Us!</h3>
+                    <p class="social-tagline">Join our community for updates, behind-the-scenes content, and robotics inspiration!</p>
+                    <div class="social-links-resources">
+                        <div class="instagram-button-wrapper">
+                            <div class="pulse-ring"></div>
+                            <div class="pulse-ring"></div>
+                            <a href="https://instagram.com/byte_hawks" target="_blank" aria-label="Instagram" class="instagram-button">
+                                <div class="button-content">
+                                    <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg>
+                                    <span class="button-text">
+                                        <span class="follow-text">Follow</span>
+                                        <span class="handle">@byte_hawks</span>
+                                    </span>
+                                </div>
+                                <div class="button-shine"></div>
+                            </a>
+                            <div class="click-hint">Click to follow our journey!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Northfield Nightbots</h3>
+                    <p>FRC Team #10686</p>
+                    <p>Northfield High School</p>
+                    <p>5500 Central Park Blvd, Denver, CO 80238</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: northfieldnightbots@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="https://instagram.com/byte_hawks" aria-label="Instagram" target="_blank" class="instagram-footer-link">
+                            <svg class="instagram-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Visitor Count</h3>
+                    <a href='https://www.versicherungen.at/cyber-versicherung/' style="font-size: 0.9rem;">Hackerversicherung</a>
+                    <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=37dc950f0d8ce3dd8dc1a8d44f032daf12c4a564'></script>
+                    <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1479487/t/0"></script>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Northfield Nightbots. All rights reserved.</p>
+                <p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.7;">
+                    <a href="https://freymancode.com" target="_blank" style="color: inherit; text-decoration: none;">
+                        Created by 416aab - Will Freyman
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
