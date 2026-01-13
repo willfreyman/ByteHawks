@@ -214,20 +214,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add floating animation to stats when in view
-    const statNumbers = document.querySelectorAll('.stat-number');
-    const statObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.animation = 'float 3s ease-in-out infinite';
-                statObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
+    // Remove floating animation from stats - keep them static
+    // const statNumbers = document.querySelectorAll('.stat-number');
+    // const statObserver = new IntersectionObserver(function(entries) {
+    //     entries.forEach(entry => {
+    //         if (entry.isIntersecting) {
+    //             entry.target.style.animation = 'float 3s ease-in-out infinite';
+    //             statObserver.unobserve(entry.target);
+    //         }
+    //     });
+    // }, { threshold: 0.5 });
 
-    statNumbers.forEach(stat => {
-        statObserver.observe(stat);
-    });
+    // statNumbers.forEach(stat => {
+    //     statObserver.observe(stat);
+    // });
 
     // Smooth navbar hide/show with enhanced animation
     const header = document.querySelector('.navbar');
@@ -298,22 +298,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add magnetic hover effect for cards
+    // Add simple hover effect for cards (no rotation)
     const cards = document.querySelectorAll('.stat-card, .mentor-card, .value-card');
     cards.forEach(card => {
         card.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-
-            const angle = Math.atan2(y, x) * (180 / Math.PI);
-            const distance = Math.min(Math.sqrt(x * x + y * y) / 10, 10);
-
-            this.style.transform = `translateY(-10px) scale(1.05) rotate3d(${-y/100}, ${x/100}, 0, ${distance}deg)`;
+            // Simple scale effect without rotation
+            this.style.transform = `translateY(-5px) scale(1.02)`;
         });
 
         card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1) rotate3d(0, 0, 0, 0)';
+            this.style.transform = 'translateY(0) scale(1)';
         });
     });
 
