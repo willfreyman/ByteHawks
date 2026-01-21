@@ -1,6 +1,64 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Grid Background Effect
+    // Performance monitoring and optimization
+    const performanceConfig = {
+        lowPerformanceMode: false,
+        animationsDisabled: false,
+        lastFrameTime: performance.now(),
+        frameCount: 0,
+        fps: 60,
+        memoryWarningThreshold: 100 * 1024 * 1024, // 100MB
+    };
+
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+        performanceConfig.animationsDisabled = true;
+    }
+
+    // Performance monitoring
+    function monitorPerformance() {
+        const now = performance.now();
+        performanceConfig.frameCount++;
+
+        if (now - performanceConfig.lastFrameTime >= 1000) {
+            performanceConfig.fps = performanceConfig.frameCount;
+            performanceConfig.frameCount = 0;
+            performanceConfig.lastFrameTime = now;
+
+            // Enable low performance mode if FPS drops below 30
+            if (performanceConfig.fps < 30 && !performanceConfig.lowPerformanceMode) {
+                enableLowPerformanceMode();
+            }
+        }
+
+        // Check memory usage if available
+        if (performance.memory && performance.memory.usedJSHeapSize > performanceConfig.memoryWarningThreshold) {
+            enableLowPerformanceMode();
+        }
+    }
+
+    function enableLowPerformanceMode() {
+        performanceConfig.lowPerformanceMode = true;
+        console.log('Low performance mode enabled');
+
+        // Disable heavy animations
+        document.body.classList.add('low-performance-mode');
+
+        // Stop particle animations
+        clearInterval(mouseParticleInterval);
+
+        // Reduce animation frame rates
+        if (gridAnimationId) {
+            cancelAnimationFrame(gridAnimationId);
+        }
+    }
+
+    // Monitor performance every 2 seconds
+    setInterval(monitorPerformance, 2000);
+
+    // Grid Background Effect (optimized)
     const canvas = document.getElementById("grid-background");
+    let gridAnimationId = null;
     if (canvas) {
         const ctx = canvas.getContext("2d");
 
@@ -53,8 +111,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         function drawGrid() {
+            if (performanceConfig.lowPerformanceMode || performanceConfig.animationsDisabled) {
+                return; // Skip animation in low performance mode
+            }
+
             ctx.clearRect(0, 0, width, height);
             const now = Date.now();
+            let activeCells = 0;
 
             for (let i = 0; i < grid.length; i++) {
                 const cell = grid[i];
@@ -72,6 +135,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 if (cell.alpha > 0) {
+                    activeCells++;
+                    // Skip rendering if too many cells are active (performance optimization)
+                    if (activeCells > 20 && performanceConfig.fps < 45) {
+                        continue;
+                    }
+
                     const centerX = cell.x + squareSize / 2;
                     const centerY = cell.y + squareSize / 2;
 
@@ -88,11 +157,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            requestAnimationFrame(drawGrid);
+            gridAnimationId = requestAnimationFrame(drawGrid);
         }
 
         initGrid();
-        drawGrid();
+        if (!performanceConfig.animationsDisabled) {
+            drawGrid();
+        }
     }
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
@@ -338,13 +409,30 @@ document.addEventListener('DOMContentLoaded', function() {
         scrollIndicator.style.width = scrollPercent + '%';
     });
 
-    // Mouse Trail Effect
+    // Mouse Trail Effect (optimized with cleanup)
+    let mouseParticles = [];
+    const maxParticles = 5; // Limit number of particles
+    let mouseParticleInterval = null;
+
     const createTrailParticle = (x, y) => {
+        if (performanceConfig.lowPerformanceMode || performanceConfig.animationsDisabled) {
+            return; // Skip in low performance mode
+        }
+
+        // Clean up old particles
+        if (mouseParticles.length >= maxParticles) {
+            const oldParticle = mouseParticles.shift();
+            if (oldParticle && oldParticle.parentNode) {
+                oldParticle.remove();
+            }
+        }
+
         const particle = document.createElement('div');
         particle.className = 'trail-particle';
         particle.style.left = x + 'px';
         particle.style.top = y + 'px';
         document.body.appendChild(particle);
+        mouseParticles.push(particle);
 
         const size = Math.random() * 10 + 5;
         particle.style.width = size + 'px';
@@ -358,11 +446,22 @@ document.addEventListener('DOMContentLoaded', function() {
             particle.style.opacity = '0';
         }, 10);
 
-        setTimeout(() => particle.remove(), 1000);
+        setTimeout(() => {
+            const index = mouseParticles.indexOf(particle);
+            if (index > -1) {
+                mouseParticles.splice(index, 1);
+            }
+            particle.remove();
+        }, 1000);
     };
 
     let mouseTimer;
+    let lastMouseMove = 0;
     document.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastMouseMove < 100) return; // Throttle to max 10 times per second
+        lastMouseMove = now;
+
         if (mouseTimer) clearTimeout(mouseTimer);
         mouseTimer = setTimeout(() => {
             createTrailParticle(e.clientX, e.clientY);
@@ -370,25 +469,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    // Magnetic Button Effect
-    const magneticElements = document.querySelectorAll('.btn, .tier-card, .mentor-card, .stat-card');
-    magneticElements.forEach(elem => {
-        elem.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
+    // Magnetic Button Effect (optimized)
+    if (!performanceConfig.animationsDisabled) {
+        const magneticElements = document.querySelectorAll('.btn, .tier-card, .mentor-card, .stat-card');
+        magneticElements.forEach(elem => {
+            let rafId = null;
+            elem.addEventListener('mousemove', function(e) {
+                if (performanceConfig.lowPerformanceMode) return;
 
-            const distance = Math.sqrt(x * x + y * y);
-            const maxDistance = Math.max(rect.width, rect.height);
-            const strength = Math.min(distance / maxDistance, 1);
+                if (rafId) cancelAnimationFrame(rafId);
+                rafId = requestAnimationFrame(() => {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
 
-            this.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(${1 + (1 - strength) * 0.05})`;
+                    const distance = Math.sqrt(x * x + y * y);
+                    const maxDistance = Math.max(rect.width, rect.height);
+                    const strength = Math.min(distance / maxDistance, 1);
+
+                    this.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(${1 + (1 - strength) * 0.05})`;
+                });
+            });
+
+            elem.addEventListener('mouseleave', function() {
+                if (rafId) cancelAnimationFrame(rafId);
+                this.style.transform = '';
+            });
         });
-
-        elem.addEventListener('mouseleave', function() {
-            this.style.transform = '';
-        });
-    });
+    }
 
     // Removed click ripple effect
 
@@ -425,24 +533,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 3D Tilt Effect
-    const tiltElements = document.querySelectorAll('.program-section, .sponsor-logo, .collage-item');
-    tiltElements.forEach(elem => {
-        elem.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width;
-            const y = (e.clientY - rect.top) / rect.height;
+    // 3D Tilt Effect (optimized)
+    if (!performanceConfig.animationsDisabled) {
+        const tiltElements = document.querySelectorAll('.program-section, .sponsor-logo, .collage-item');
+        tiltElements.forEach(elem => {
+            let rafId = null;
+            elem.addEventListener('mousemove', function(e) {
+                if (performanceConfig.lowPerformanceMode) return;
 
-            const tiltX = (y - 0.5) * 10;
-            const tiltY = (x - 0.5) * -10;
+                if (rafId) cancelAnimationFrame(rafId);
+                rafId = requestAnimationFrame(() => {
+                    const rect = this.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width;
+                    const y = (e.clientY - rect.top) / rect.height;
 
-            this.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+                    const tiltX = (y - 0.5) * 10;
+                    const tiltY = (x - 0.5) * -10;
+
+                    this.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+                });
+            });
+
+            elem.addEventListener('mouseleave', function() {
+                if (rafId) cancelAnimationFrame(rafId);
+                this.style.transform = '';
+            });
         });
-
-        elem.addEventListener('mouseleave', function() {
-            this.style.transform = '';
-        });
-    });
+    }
 
     // Process Slider Functionality
     const processSlider = {
@@ -1083,5 +1200,69 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize search system
     searchSystem.init();
 
-    console.log('Northfield Nightbots website initialized with enhanced mouse animations, process slider, and search functionality!');
+    // Cleanup function for long-running sessions
+    function performCleanup() {
+        // Clear old particles
+        mouseParticles.forEach(p => {
+            if (p && p.parentNode) p.remove();
+        });
+        mouseParticles = [];
+
+        // Clear any orphaned trail particles
+        document.querySelectorAll('.trail-particle').forEach(p => {
+            if (p.parentNode) p.remove();
+        });
+
+        // Garbage collection hint
+        if (window.gc) {
+            window.gc();
+        }
+    }
+
+    // Run cleanup every 5 minutes to prevent memory buildup
+    setInterval(performCleanup, 5 * 60 * 1000);
+
+    // Visibility change handler to pause animations when tab is hidden
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            // Pause animations when tab is hidden
+            if (gridAnimationId) {
+                cancelAnimationFrame(gridAnimationId);
+                gridAnimationId = null;
+            }
+        } else {
+            // Resume animations when tab is visible
+            if (!performanceConfig.animationsDisabled && !gridAnimationId && canvas) {
+                drawGrid();
+            }
+        }
+    });
+
+    // Lazy load YouTube iframes
+    function loadYouTubeVideos() {
+        const iframes = document.querySelectorAll('iframe[data-src]');
+        const iframeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const iframe = entry.target;
+                    const src = iframe.getAttribute('data-src');
+                    if (src && !iframe.src) {
+                        iframe.src = src;
+                        iframe.removeAttribute('data-src');
+                    }
+                    iframeObserver.unobserve(iframe);
+                }
+            });
+        }, {
+            rootMargin: '100px' // Start loading 100px before visible
+        });
+
+        iframes.forEach(iframe => {
+            iframeObserver.observe(iframe);
+        });
+    }
+
+    loadYouTubeVideos();
+
+    console.log('Northfield Nightbots website initialized with performance optimizations!');
 });
