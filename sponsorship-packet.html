@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsorship Packet - Northfield Nightbots</title>
+    <link rel="stylesheet" href="/nightbotwebsite/styles.css">
+    <style>
+        .packet-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .packet-header {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            margin: -2rem -2rem 2rem -2rem;
+        }
+
+        .packet-header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 3px;
+        }
+
+        .packet-header .team-number {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .packet-header .year {
+            font-size: 1.5rem;
+        }
+
+        .packet-section {
+            margin: 2.5rem 0;
+        }
+
+        .packet-section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .packet-section p {
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .sponsorship-tiers-packet {
+            background: var(--bg-alt);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .tier-packet {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .tier-packet h3 {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-packet ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tier-packet li {
+            padding: 0.3rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .tier-packet li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .pledge-form {
+            background: var(--bg-alt);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+        }
+
+        .pledge-form h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .sponsorship-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .sponsorship-option {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sponsorship-option:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .donation-instructions {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .donation-instructions h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-section {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--bg-alt);
+            border-radius: 12px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 0.8rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: var(--secondary-color);
+        }
+
+        .level-indicator {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .level-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .level-emoji {
+            font-size: 2rem;
+            animation: bounce 0.5s ease-in-out 0.3s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .level-benefits {
+            font-size: 1rem;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards 0.3s;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .level-benefits-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.5rem;
+        }
+
+        .level-benefits-list li {
+            padding: 0.2rem 0;
+            opacity: 0;
+            animation: slideInLeft 0.3s forwards;
+        }
+
+        .level-benefits-list li:nth-child(1) { animation-delay: 0.4s; }
+        .level-benefits-list li:nth-child(2) { animation-delay: 0.5s; }
+        .level-benefits-list li:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="padding: 1rem 2rem;">
+        <a href="index.html" class="back-button">← Back to Main Site</a>
+    </div>
+
+    <main>
+        <div class="packet-container">
+            <div class="packet-header">
+                <h1>NORTHFIELD NIGHTBOTS</h1>
+                <div class="team-number">TEAM 10686</div>
+                <div class="year">2025-2026</div>
+                <h2 style="margin-top: 1rem; border: none;">Sponsorship Packet</h2>
+            </div>
+
+            <div class="packet-section">
+                <h2>Welcome to Our Team</h2>
+                <p>Welcome to FIRST Robotics Team 10686, the "Nightbots," representing Northfield High School located in Denver. Our aim is to offer STEM opportunities to high school students in underrepresented and underserved communities in Denver. By designing and constructing robots for competitions, we provide hands-on experiences in mechanical engineering, programming, and business management. These skills help nurture future leaders in science, technology, engineering, and mathematics, and equip them for STEM-based careers.</p>
+            </div>
+
+            <div class="packet-section">
+                <h2>Our Mission & Impact</h2>
+                <p>Annually, we participate in the FIRST Robotics Competition, the foremost robotics event for high school students. This competition serves as an excellent platform to inspire and motivate high schoolers of all backgrounds to pursue careers in STEM by working on projects that encourage collaboration and teamwork. However, we rely on fundraising to purchase materials, tools, and meet travel expenses for the competition.</p>
+
+                <p>Our 3+ weekly practices are designed to be engaging, targeted and hands-on, ensuring that our members get the most out of each and every session. We dedicate 15 hours per week to preseason training, which allows us to hone our skills and develop new strategies that will give us the best possible outcome during our competitions.</p>
+            </div>
+
+            <div class="packet-section">
+                <h2>Growing Team, Growing Impact</h2>
+                <p>As we grow in numbers, we strive to make sure every member has a role to play in our success. With over 40 dedicated students on our team, each working on important tasks and contributing their own unique strengths, we've found our expenses have increased.</p>
+
+                <p>That's why we rely on donations, grants, and sponsorships from our community to help us cover the costs of building our robots and traveling to competitions. We have set an ambitious fundraising goal of <strong>$40,000</strong>, which will enable us to compete on a national level and showcase our skills to a wider audience.</p>
+
+                <p>But it's not just about us. We also want to give back to our community and help others who are interested in robotics. This year we plan to cultivate the growing national interest in high school robotics by mentoring a new team and helping them enter an FTC competition.</p>
+            </div>
+
+            <div class="packet-section">
+                <h2>Why Sponsor Us?</h2>
+                <p>By sponsoring our team, you have the opportunity to feature your company and logo prominently on our website, social media channels, team jerseys, and robots – a vast array of advertising options that can effectively boost your brand awareness. You'll also have the ability to showcase that you are committed to creating a better future through your sponsorship contribution.</p>
+
+                <p>Moreover, your sponsorship will be tax-deductible to the fullest extent possible, as NightBots Robotics is a 501(c)(3) non-profit organization.</p>
+
+                <p><strong>Investing in our team is an investment in the future.</strong> Our young members have the potential to become tomorrow's innovators and leaders, and with your support, they will be able to achieve their goals. Help us put our team on a path to success!</p>
+            </div>
+
+            <div class="sponsorship-tiers-packet">
+                <h2>Sponsorship Levels</h2>
+
+                <div class="tier-packet">
+                    <h3>🚀 Soar: $5,000+</h3>
+                    <ul>
+                        <li>Large company logo on banner</li>
+                        <li>Company logo on robot sponsor panel</li>
+                        <li>Company logo on team shirts</li>
+                        <li>Logo and company link on website</li>
+                        <li>4 free team shirts</li>
+                        <li>2 free hoodies</li>
+                    </ul>
+                </div>
+
+                <div class="tier-packet">
+                    <h3>✈️ Glide: $1,000+</h3>
+                    <ul>
+                        <li>Company logo on banner</li>
+                        <li>Company logo on robot sponsor panel</li>
+                        <li>Company logo on team shirts</li>
+                        <li>Logo and company link on website</li>
+                        <li>2 free team shirts</li>
+                        <li>1 free hoodie</li>
+                    </ul>
+                </div>
+
+                <div class="tier-packet">
+                    <h3>⬆️ Ascend: $500+</h3>
+                    <ul>
+                        <li>Company logo on team shirts</li>
+                        <li>Logo and company link on website</li>
+                        <li>2 free team shirts</li>
+                    </ul>
+                </div>
+
+                <div class="tier-packet">
+                    <h3>📈 Rise: $250+</h3>
+                    <ul>
+                        <li>Company logo on team shirts</li>
+                        <li>Logo and company link on website</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pledge-form">
+                <h2>Sponsor Pledge Form</h2>
+
+                <form action="https://formspree.io/f/mlggebay" method="POST">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="company-name">Company Name</label>
+                            <input type="text" id="company-name" name="company-name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company-address">Company Address</label>
+                            <input type="text" id="company-address" name="company-address" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-name">Contact Name</label>
+                            <input type="text" id="contact-name" name="contact-name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shirt-size">Shirt Size</label>
+                            <select id="shirt-size" name="shirt-size">
+                                <option value="">Select Size</option>
+                                <option value="S">Small</option>
+                                <option value="M">Medium</option>
+                                <option value="L">Large</option>
+                                <option value="XL">X-Large</option>
+                                <option value="XXL">XX-Large</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="hoodie-size">Hoodie Size</label>
+                            <select id="hoodie-size" name="hoodie-size">
+                                <option value="">Select Size</option>
+                                <option value="S">Small</option>
+                                <option value="M">Medium</option>
+                                <option value="L">Large</option>
+                                <option value="XL">X-Large</option>
+                                <option value="XXL">XX-Large</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 2rem;">
+                        <label for="amount" style="font-size: 1.3rem; color: var(--secondary-color);">Amount Pledged: $</label>
+                        <input type="number" id="amount" name="amount" min="250" required style="font-size: 1.2rem; padding: 1rem;">
+                        <input type="hidden" id="sponsorship-level" name="sponsorship-level" value="">
+                        <div id="sponsorship-level-display" style="margin-top: 1.5rem;">
+                            <!-- Dynamic content will appear here -->
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button type="submit" class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1.2rem;">
+                            Submit Sponsorship Pledge
+                        </button>
+                    </div>
+                </form>
+
+                <div class="donation-instructions">
+                    <h3>Donation Instructions</h3>
+                    <p><strong>Make all checks payable to:</strong> NightBots Robotics</p>
+
+                    <p><strong>Mail this page and your check to:</strong><br>
+                    Northfield High School<br>
+                    NightBots Robotics<br>
+                    5500 Central Park Blvd,<br>
+                    Denver, CO 80238</p>
+
+                    <p><strong>Or Email:</strong> <a href="mailto:northfieldnightbots@gmail.com">northfieldnightbots@gmail.com</a></p>
+
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: var(--bg-alt); border-radius: 8px;">
+                        <p><strong>Tax Information:</strong><br>
+                        NightBots Robotics is a non-profit 501(c)(3) organization.<br>
+                        Federal Tax ID# 92-1905431</p>
+
+                        <p style="font-style: italic; margin-top: 1rem;">Per IRS guidelines, we affirm that no goods or services were provided in exchange for your gift making your donation tax-deductible to the full extent permitted by law.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h2>With Gratitude</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">Thank you for considering supporting the NightBots Robotics team!</p>
+                <p><strong>Contact:</strong> <a href="mailto:northfieldnightbots@gmail.com">northfieldnightbots@gmail.com</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Northfield Nightbots</h3>
+                    <p>FRC Team #10686</p>
+                    <p>Northfield High School</p>
+                    <p>5500 Central Park Blvd, Denver, CO 80238</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: northfieldnightbots@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Northfield Nightbots. All rights reserved.</p>
+                <p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.7;">
+                    <a href="https://freymancode.com" target="_blank" style="color: inherit; text-decoration: none;">
+                        Created by 416aab - Will Freyman
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const sponsorshipLevels = {
+            soar: {
+                min: 5000,
+                emoji: '🚀',
+                name: 'Soar',
+                description: 'Elite Sponsor',
+                benefits: [
+                    'Large logo on banner & robot',
+                    'Logo on team shirts & website',
+                    '4 team shirts + 2 hoodies'
+                ]
+            },
+            glide: {
+                min: 1000,
+                emoji: '✈️',
+                name: 'Glide',
+                description: 'Premium Sponsor',
+                benefits: [
+                    'Logo on banner, robot & shirts',
+                    'Website recognition',
+                    '2 team shirts + 1 hoodie'
+                ]
+            },
+            ascend: {
+                min: 500,
+                emoji: '⬆️',
+                name: 'Ascend',
+                description: 'Major Sponsor',
+                benefits: [
+                    'Logo on team shirts',
+                    'Website recognition',
+                    '2 team shirts'
+                ]
+            },
+            rise: {
+                min: 250,
+                emoji: '📈',
+                name: 'Rise',
+                description: 'Supporting Sponsor',
+                benefits: [
+                    'Logo on team shirts',
+                    'Website recognition'
+                ]
+            }
+        };
+
+        function determineSponsorshipLevel(amount) {
+            if (amount >= sponsorshipLevels.soar.min) return sponsorshipLevels.soar;
+            if (amount >= sponsorshipLevels.glide.min) return sponsorshipLevels.glide;
+            if (amount >= sponsorshipLevels.ascend.min) return sponsorshipLevels.ascend;
+            if (amount >= sponsorshipLevels.rise.min) return sponsorshipLevels.rise;
+            return null;
+        }
+
+        const amountInput = document.getElementById('amount');
+        const levelDisplay = document.getElementById('sponsorship-level-display');
+        const levelHiddenInput = document.getElementById('sponsorship-level');
+        const form = document.querySelector('form');
+        let debounceTimer;
+
+        amountInput.addEventListener('input', function() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                const amount = parseFloat(this.value);
+
+                if (isNaN(amount) || amount <= 0) {
+                    levelDisplay.innerHTML = '';
+                    return;
+                }
+
+                if (amount < 250) {
+                    levelHiddenInput.value = '';
+                    levelDisplay.innerHTML = `
+                        <div class="level-indicator" style="background: linear-gradient(135deg, #dc3545, #c82333);">
+                            <div class="level-title">
+                                <span class="level-emoji">⚠️</span>
+                                <span>Minimum Sponsorship Required</span>
+                            </div>
+                            <div class="level-benefits">
+                                <strong>Corporate sponsorships start at $250</strong>
+                                <p style="margin-top: 0.5rem; margin-bottom: 0;">
+                                    This form is specifically for corporate sponsors.
+                                    The minimum corporate sponsorship amount is $250 to qualify for the Rise level benefits.
+                                </p>
+                                <p style="margin-top: 0.5rem;">
+                                    For individual donations of any amount, please use our
+                                    <a href="https://givebutter.com/uMj1Zr" target="_blank" style="color: #fff; text-decoration: underline;">general donation page</a>.
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const level = determineSponsorshipLevel(amount);
+                if (level) {
+                    levelHiddenInput.value = level.name;
+                    const benefitsHtml = level.benefits.map(benefit =>
+                        `<li>✓ ${benefit}</li>`
+                    ).join('');
+
+                    levelDisplay.innerHTML = `
+                        <div class="level-indicator">
+                            <div class="level-title">
+                                <span class="level-emoji">${level.emoji}</span>
+                                <span>${level.name} Level - ${level.description}</span>
+                            </div>
+                            <div class="level-benefits">
+                                <strong>Your benefits at $${amount.toLocaleString()}:</strong>
+                                <ul class="level-benefits-list">
+                                    ${benefitsHtml}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+
+                    // Re-trigger animation on update
+                    const indicator = levelDisplay.querySelector('.level-indicator');
+                    indicator.style.animation = 'none';
+                    setTimeout(() => {
+                        indicator.style.animation = '';
+                    }, 10);
+                }
+            }, 300);
+        });
+
+        // Form validation
+        form.addEventListener('submit', function(e) {
+            const amount = parseFloat(amountInput.value);
+            if (amount < 250) {
+                e.preventDefault();
+                alert('Corporate sponsorships must be at least $250. For smaller donations, please visit our general donation page.');
+                return false;
+            }
+        });
+    </script>
+</body>
+</html>
