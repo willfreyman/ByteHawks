@@ -8,51 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
 </head>
 <body>
-    <!--
-    =====================================================
-    PLACEHOLDER CONTENT TRACKING - TO BE REPLACED:
-    =====================================================
-
-    1. HERO SECTION:
-       - [ ] Hero background image (line ~47)
-
-    2. PHOTO STRIP (10 photos total - 5 unique x2 for scrolling):
-       - [ ] Robot Close-up photo (lines ~76, 104)
-       - [ ] Team Working photo (lines ~81, 109)
-       - [ ] Competition Action photo (lines ~86, 114)
-       - [ ] Award Ceremony photo (lines ~91, 119)
-       - [ ] Team Celebration photo (lines ~96, 124)
-
-    3. COMPETITION GALLERY (12 photos):
-       - [ ] Competition photos 1-6 (lines ~282-297)
-       - [ ] Competition photos 1-6 duplicate (lines ~301-316)
-
-    4. MENTOR SECTION:
-       - [ ] Ken Prehoda photo (line ~349)
-       - [ ] Greg Kubin photo (line ~357) + bio (line ~362)
-       - [ ] William Williams photo (line ~365) + bio (line ~370)
-       - [ ] Fourth mentor name, photo (line ~373) + bio (line ~378)
-
-    5. OUR PROCESS SECTION:
-       - [ ] Design process description (line ~431)
-       - [ ] Design process image (line ~440)
-       - [ ] Building process description (line ~453)
-       - [ ] Building process image (line ~462)
-       - [ ] Programming process description (line ~475)
-       - [ ] Programming process image (line ~484)
-       - [ ] Competition description (line ~497)
-       - [ ] Competition image (line ~506)
-
-    6. SPONSOR LOGOS:
-       - [ ] Sponsor logo 1 (line ~623)
-       - [ ] Sponsor logo 2 (line ~626)
-       - [ ] Sponsor logo 3 (line ~629)
-       - [ ] Sponsor logo 4 (line ~632)
-
-    =====================================================
-    Search for "TODO: PLACEHOLDER" to find all items
-    =====================================================
-    -->
     <header>
         <nav class="navbar">
             <div class="nav-container">
@@ -113,66 +68,6 @@
             </div>
         </section>
 
-        <!-- Decorative Photo Strip -->
-        <div class="photo-strip">
-            <div class="photo-strip-track">
-                <div class="photo-strip-container">
-                    <div class="photo-item">
-                        <div class="photo-placeholder">
-                            <span>[Robot Close-up]</span>
-                        </div>
-                    </div>
-                    <div class="photo-item">
-                        <div class="photo-placeholder">
-                            <span>[Team Working]</span>
-                        </div>
-                    </div>
-                    <div class="photo-item">
-                        <div class="photo-placeholder">
-                            <span>[Competition Action]</span>
-                        </div>
-                    </div>
-                    <div class="photo-item">
-                        <div class="photo-placeholder">
-                            <span>[Award Ceremony]</span>
-                        </div>
-                    </div>
-                    <div class="photo-item">
-                        <div class="photo-placeholder">
-                            <span>[Team Celebration]</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Duplicate set for seamless infinite scroll -->
-                <div class="photo-strip-container">
-                    <div class="photo-item">
-                        <div class="photo-placeholder">
-                            <span>[Robot Close-up]</span>
-                        </div>
-                    </div>
-                    <div class="photo-item">
-                        <div class="photo-placeholder">
-                            <span>[Team Working]</span>
-                        </div>
-                    </div>
-                    <div class="photo-item">
-                        <div class="photo-placeholder">
-                            <span>[Competition Action]</span>
-                        </div>
-                    </div>
-                    <div class="photo-item">
-                        <div class="photo-placeholder">
-                            <span>[Award Ceremony]</span>
-                        </div>
-                    </div>
-                    <div class="photo-item">
-                        <div class="photo-placeholder">
-                            <span>[Team Celebration]</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <section id="about" class="section about-enhanced">
             <div class="floating-shapes">
@@ -323,48 +218,6 @@
             </div>
         </section>
 
-        <!-- Photo Gallery Banner -->
-        <div class="gallery-banner">
-            <div class="gallery-track">
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 1]</div>
-                </div>
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 2]</div>
-                </div>
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 3]</div>
-                </div>
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 4]</div>
-                </div>
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 5]</div>
-                </div>
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 6]</div>
-                </div>
-                <!-- Duplicate ALL slides for infinite scroll -->
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 1]</div>
-                </div>
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 2]</div>
-                </div>
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 3]</div>
-                </div>
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 4]</div>
-                </div>
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 5]</div>
-                </div>
-                <div class="gallery-slide">
-                    <div class="gallery-image">[Competition 6]</div>
-                </div>
-            </div>
-        </div>
 
         <section id="mentors" class="section mentors-enhanced">
             <div class="geometric-bg">
@@ -394,28 +247,12 @@
                         <p class="mentor-bio">Yukta Thadi teaches Engineering at NHS</p>
                     </div>
                     <div class="mentor-card">
-                        <div class="mentor-photo placeholder-image">
-                            <p>[Photo]</p>
+                        <div class="mentor-photo">
+                            <img src="taed.jpg" alt="Taed" loading="lazy">
                         </div>
                         <h3>Taed</h3>
                         <p class="mentor-role">FIRST Mentor</p>
                         <p class="mentor-bio">Taed is our FIRST mentor for the 2026 Season. He comes with over 40 years of experience as a pediatric orthotic and prosthetic engineer. He has mentored FIRST robotics teams in CA for 20 years</p>
-                    </div>
-                    <div class="mentor-card">
-                        <div class="mentor-photo placeholder-image">
-                            <p>[Photo]</p>
-                        </div>
-                        <h3>Mark</h3>
-                        <p class="mentor-role">Mentor</p>
-                        <p class="mentor-bio">[Placeholder: Brief bio, expertise, and years with team]</p>
-                    </div>
-                    <div class="mentor-card">
-                        <div class="mentor-photo placeholder-image">
-                            <p>[Photo]</p>
-                        </div>
-                        <h3>Ben</h3>
-                        <p class="mentor-role">Mentor</p>
-                        <p class="mentor-bio">[Placeholder: Brief bio, expertise, and years with team]</p>
                     </div>
                     <div class="mentor-card">
                         <div class="mentor-photo">
@@ -424,6 +261,22 @@
                         <h3>Kendall</h3>
                         <p class="mentor-role">Biomedical Engineering Professor</p>
                         <p class="mentor-bio">Kendall is a professor of Biomedical Engineering on the Anschutz Medical Campus with a PhD in Mechanical Engineering. He's always loved programming, mechanics, and video games. Expertise: Mechanics (dynamics, solid mechanics, etc); Programming; Numerical Methods; Computer Vision. First year with team.</p>
+                    </div>
+                    <div class="mentor-card">
+                        <div class="mentor-photo">
+                            <img src="stevecurtis.png" alt="Steve Curtis" loading="lazy">
+                        </div>
+                        <h3>Steve Curtis</h3>
+                        <p class="mentor-role">Technology & Operations Leader</p>
+                        <p class="mentor-bio">Steve Curtis is a technology and operations leader with experience building and mentoring teams. He enjoys helping students learn how to solve problems, work together, and turn ideas into real-world solutions.</p>
+                    </div>
+                    <div class="mentor-card">
+                        <div class="mentor-photo">
+                            <img src="mark.jpg" alt="Mark" loading="lazy">
+                        </div>
+                        <h3>Mark</h3>
+                        <p class="mentor-role">Political Consultant & Data Scientist</p>
+                        <p class="mentor-bio">Political consultant and data scientist with experience in polling, focus groups, and data modeling. Has worked with environmental groups, tech startups like Nextdoor.com, and various campaigns. Passionate about diving into new data challenges.</p>
                     </div>
                 </div>
                 <div class="mentor-cta">
@@ -476,7 +329,7 @@
                                     </div>
                                     <h3 class="slide-title">Step 1: Design & Brainstorm</h3>
                                     <div class="slide-description">
-                                        <p>[Placeholder: Our design process begins with understanding the game challenge. Teams collaborate to brainstorm innovative solutions, sketch concepts, and use CAD software to create detailed 3D models.]</p>
+                                        <p>Our design process begins with understanding the game challenge. Teams collaborate to brainstorm innovative solutions, sketch concepts, and use CAD software to create detailed 3D models.</p>
                                     </div>
                                     <ul class="slide-features">
                                         <li>Game analysis and strategy development</li>
@@ -484,9 +337,6 @@
                                         <li>CAD modeling with SolidWorks</li>
                                         <li>Design reviews and iterations</li>
                                     </ul>
-                                    <div class="slide-image">
-                                        <div class="image-placeholder">[Design Process Image]</div>
-                                    </div>
                                 </div>
                             </div>
 
@@ -498,7 +348,7 @@
                                     </div>
                                     <h3 class="slide-title">Step 2: Build & Fabricate</h3>
                                     <div class="slide-description">
-                                        <p>[Placeholder: With designs finalized, we move to fabrication. Using tools from basic hand tools to advanced machinery, we bring our robot to life piece by piece.]</p>
+                                        <p>With designs finalized, we move to fabrication. Using tools from basic hand tools to advanced machinery, we bring our robot to life piece by piece.</p>
                                     </div>
                                     <ul class="slide-features">
                                         <li>Material selection and procurement</li>
@@ -506,9 +356,6 @@
                                         <li>Assembly and mechanical systems</li>
                                         <li>Quality control and testing</li>
                                     </ul>
-                                    <div class="slide-image">
-                                        <div class="image-placeholder">[Building Process Image]</div>
-                                    </div>
                                 </div>
                             </div>
 
@@ -520,7 +367,7 @@
                                     </div>
                                     <h3 class="slide-title">Step 3: Program & Test</h3>
                                     <div class="slide-description">
-                                        <p>[Placeholder: Programming brings our robot to life. We code autonomous routines, driver controls, and sensor integration while continuously testing and refining.]</p>
+                                        <p>Programming brings our robot to life. We code autonomous routines, driver controls, and sensor integration while continuously testing and refining.</p>
                                     </div>
                                     <ul class="slide-features">
                                         <li>Java programming</li>
@@ -528,9 +375,6 @@
                                         <li>Autonomous path planning</li>
                                         <li>Driver practice and optimization</li>
                                     </ul>
-                                    <div class="slide-image">
-                                        <div class="image-placeholder">[Programming Process Image]</div>
-                                    </div>
                                 </div>
                             </div>
 
@@ -542,7 +386,7 @@
                                     </div>
                                     <h3 class="slide-title">Step 4: Compete & Learn</h3>
                                     <div class="slide-description">
-                                        <p>[Placeholder: Competition day! We put our robot to the test, collaborate with alliance partners, and learn from both successes and challenges.]</p>
+                                        <p>Competition day! We put our robot to the test, collaborate with alliance partners, and learn from both successes and challenges.</p>
                                     </div>
                                     <ul class="slide-features">
                                         <li>Pre-competition preparation</li>
@@ -550,9 +394,6 @@
                                         <li>Match performance and adaptation</li>
                                         <li>Post-match analysis and improvements</li>
                                     </ul>
-                                    <div class="slide-image">
-                                        <div class="image-placeholder">[Competition Image]</div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -670,15 +511,6 @@
                         <div class="sponsors-grid">
                             <div class="sponsor-logo">
                                 <img src="TECHSTORM_SPONSOR.jpg" alt="TechStorm Sponsor" style="width: 100%; height: 100%; object-fit: contain;" loading="lazy">
-                            </div>
-                            <div class="sponsor-logo placeholder-image">
-                                <p>[Sponsor Logo]</p>
-                            </div>
-                            <div class="sponsor-logo placeholder-image">
-                                <p>[Sponsor Logo]</p>
-                            </div>
-                            <div class="sponsor-logo placeholder-image">
-                                <p>[Sponsor Logo]</p>
                             </div>
                         </div>
                     </div>
