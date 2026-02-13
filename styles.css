@@ -101,7 +101,7 @@
 }
 
 /* Enhanced Interactive Elements */
-.btn, .tier-card, .mentor-card, .stat-card {
+.btn, .tier-card, .mentor-card {
     transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     cursor: pointer;
 }
@@ -327,7 +327,7 @@ main {
 .hero-image-placeholder {
     width: 100%;
     height: 100%;
-    background-image: url('P3220355.JPG');
+    background-image: url('images/P3220355.JPG');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -341,7 +341,7 @@ main {
 
 /* When you add a real image, use this:
 .hero-background {
-    background-image: url('path-to-your-team-photo.jpg');
+    background-image: url('images/team_photo.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -758,7 +758,6 @@ main {
     border-radius: 8px;
     text-align: center;
     box-shadow: var(--shadow);
-    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     position: relative;
     overflow: hidden;
     display: flex;
@@ -775,15 +774,6 @@ main {
     width: 100%;
     height: 3px;
     background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-}
-
-.stat-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-.stat-card:hover .stat-number {
-    animation: pulse 0.6s ease;
 }
 
 .stat-card h4 {
@@ -823,7 +813,6 @@ main {
 .award-icon {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
-    animation: pulse 2s infinite;
 }
 
 /* FIRST Section */
@@ -1305,7 +1294,7 @@ main {
     margin-bottom: 2rem;
 }
 
-/* Process Section - Animated Slider */
+/* === PROCESS SECTION CSS - COMMENTED OUT (section is hidden in HTML) ===
 .process-section {
     position: relative;
     overflow: visible;
@@ -1799,6 +1788,7 @@ main {
         padding: 0 0.5rem;
     }
 }
+=== END PROCESS SECTION CSS === */
 
 /* Resources Section */
 .resources-grid {
@@ -2260,33 +2250,6 @@ main {
     border-top: 1px solid rgba(255,255,255,0.2);
 }
 
-/* Placeholder Images */
-.placeholder-image, .image-placeholder, .photo-placeholder {
-    background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
-    border: 2px dashed #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-    font-size: 1.2rem;
-    min-height: 200px;
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
-}
-
-.placeholder-image::before, .image-placeholder::before, .photo-placeholder::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-    animation: shimmer 3s infinite;
-}
-
-
 /* Enhanced About Section */
 .about-enhanced {
     position: relative;
@@ -2395,12 +2358,6 @@ main {
     transform: scale(1.05) rotate(-2deg);
     box-shadow: 0 15px 40px rgba(0,0,0,0.15);
     z-index: 10;
-}
-
-.collage-item .image-placeholder {
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
 }
 
 .collage-image {

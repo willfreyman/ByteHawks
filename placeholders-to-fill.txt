@@ -1,0 +1,38 @@
+NORTHFIELD NIGHTBOTS WEBSITE - REMAINING PLACEHOLDERS
+======================================================
+Updated 2/13/2026. Items marked DONE have been completed.
+
+
+--- COMPLETED ---
+
+[DONE] #1  Anna Noble bio - full paragraph added
+[DONE] #2  Yukta Thadi bio - full paragraph added
+[DONE] #3  Mentors intro - sentences added under "Guiding Our Team"
+[DONE] #4  "Apart" typo fixed to "A Part", intro paragraph added
+[DONE] #5  Discord reference removed from join steps
+[DONE] #8  Footer year updated to 2025-2026 on index.html
+[DONE] #9  Shops at Northfield sponsor logo added
+[DONE] #10 Footer year updated to 2025-2026 on sponsorship-packet.html
+
+
+--- STILL NEEDS ATTENTION ---
+
+1. JOIN OUR TEAM - Step "Sign and read our handbook"
+   Needs: A link to the handbook (PDF or Google Doc)
+
+2. JOIN OUR TEAM - Step "Register with FIRST"
+   Needs: A link to the FIRST registration page
+
+
+--- FILES THAT MAY BE SAFE TO DELETE ---
+
+These files are not referenced anywhere on the live site:
+
+- 73776631924152934.JPG        (unused image, not referenced)
+- team_photo.jpg               (unused image, not referenced)
+- style.css                    (old stylesheet, site uses styles.css)
+- slider-test.html             (test page, not linked from site)
+- destination-slider-w-svg-gsap/  (experimental slider, not integrated)
+- PERFORMANCE_OPTIMIZATIONS.md (dev documentation)
+- process-slider-template.txt  (template for commented-out section)
+- notes.txt                    (old task note: "change formspree link")
